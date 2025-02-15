@@ -5,7 +5,6 @@ import { Routes, Route } from "react-router-dom";
 const Home = lazy(() => import("../pages/Home"));
 const Onboarding = lazy(() => import("../pages/Onboarding"));//온보딩
 const Login = lazy(() => import("../pages/Login"));//로그인
-const BeforeAfter = lazy(() => import("../pages/BeforeAfter"));///비포애프터
 const ReservationInquiry = lazy(() => import("../pages/ReservationInquiry"));//예약조회
 
 const DesignerDetail = lazy(() => import("../pages/designers/DesignerDetail"));//디자이너 상세
@@ -23,7 +22,6 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/beforeafter" element={<BeforeAfter />} />
         <Route path="/reservationinquiry" element={<ReservationInquiry />} />
         <Route path="/designerdetail" element={<DesignerDetail />} />
         <Route path="/paymenttransfer" element={<PaymentTransfer  />} />
@@ -32,7 +30,7 @@ const Router = () => {
 
         {/* 🔹 404 Not Found 라우트 추가 */}
         <Route path="*" element={<NotFound />} />
-        
+
       </Routes>
     </Suspense>
   );
