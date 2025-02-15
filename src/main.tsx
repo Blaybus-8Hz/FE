@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom"; // React Router import 추가
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter basename="/8hz-FE">
+    <BrowserRouter basename="/">
       <App />
     </BrowserRouter>
   </React.StrictMode>

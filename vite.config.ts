@@ -33,5 +33,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/8hz-FE/", // GitHub Pages 레포지토리 이름
+  base: "/", // GitHub Pages 레포지토리 이름
 });

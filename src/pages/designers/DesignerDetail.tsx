@@ -1,8 +1,8 @@
-//홈화면
+//디자이너 상세 페이지(예약 정보 입력 페이지)
 
 import React from "react";
 
-const Home: React.FC = () => {
+const DesignerDetail: React.FC = () => {
   return (
     <div className="flex justify-center items-center min-h-screen w-screen bg-gray-100 p-4">
       <div className="flex flex-col md:flex-row w-full max-w-7xl max-h-screen bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
@@ -15,4 +15,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default DesignerDetail;
