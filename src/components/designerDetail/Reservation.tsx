@@ -4,20 +4,27 @@ import CustomCalendar from './CustomCalendar'
 import TimeSelectBar from './TimeSelectBar'
 import { useGetAvailableTimes } from '../../apis/api/get/useGetAvailableTimes'
 import dayjs from 'dayjs'
+import { useReservationStore } from '../../store/useReservationStore'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
 
 const Reservation: React.FC = () => {
+    const {
+        reservationDate,
+        setReservationDate,
+        reservationTime,
+        setReservationTime,
+    } = useReservationStore()
+
     //날짜 선택
-    const [selectedDate, setSelectedDate] = useState<Value>(new Date()) // 초기값은 현 날짜
     const handleDateClick = (value: Value) => {
-        setSelectedDate(value)
+        setReservationDate(value as Date)
     }
+
     //시간 선택
-    const [selectedTime, setSelectedTime] = useState<string | null>(null)
     const handleTimeClick = (time: string) => {
-        setSelectedTime(time)
+        setReservationTime(time)
     }
 
     //예약 가능한 시간 조회
@@ -25,7 +32,7 @@ const Reservation: React.FC = () => {
     const designerId = '1' //임시 디자이너 id
     const availableTimes = useGetAvailableTimes(
         designerId,
-        dayjs(selectedDate as Date).format('YYYY-MM-DD')
+        dayjs(reservationDate as Date).format('YYYY-MM-DD')
     )
 
     useEffect(() => {
@@ -53,11 +60,11 @@ const Reservation: React.FC = () => {
             <div className='text-body1 font-bold text-gray-1300'>상담 예약</div>
             <ToggleButton />
             <CustomCalendar
-                selectedDate={selectedDate}
+                selectedDate={reservationDate}
                 handleDateClick={handleDateClick}
             />
             <TimeSelectBar
-                selectedTime={selectedTime}
+                selectedTime={reservationTime}
                 handleTimeClick={handleTimeClick}
                 timeTable={timeTable}
             />

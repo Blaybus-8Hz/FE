@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import DesignerInfo from '../../components/designerDetail/DesignerInfo'
-import Reservation from '../../components/designerDetail/Reservation'
-import Divider from '../../components/designerDetail/Divider'
-import ButtonLg from '../../components/designerDetail/ButtonLg'
+import { useReservationStore } from '../../store/useReservationStore'
 import { SlArrowLeft } from 'react-icons/sl'
 import { IconContext } from 'react-icons'
+import DesignerInfo from '../../components/designerDetail/DesignerInfo'
+import Divider from '../../components/designerDetail/Divider'
+import Reservation from '../../components/designerDetail/Reservation'
+import ButtonLg from '../../components/designerDetail/ButtonLg'
 
 const DesignerDetail: React.FC = () => {
+    const { designerId, reservationDate, reservationTime, isOnline } =
+        useReservationStore()
+    const [isButtonVisible, setIsButtonVisible] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
 
     const handleScroll = () => {
@@ -25,13 +29,24 @@ const DesignerDetail: React.FC = () => {
         }
     }, [])
 
+    useEffect(() => {
+        if (
+            designerId.length > 0 &&
+            reservationDate !== null &&
+            reservationTime !== null
+        ) {
+            setIsButtonVisible(true)
+        } else {
+            setIsButtonVisible(false)
+        }
+    }, [designerId, reservationDate, reservationTime])
+
     return (
-        <div className='relative mt-0 flex h-screen w-full flex-col items-center justify-start overflow-visible'>
+        <div>
             <IconContext.Provider
                 value={{
-                    className: isScrolled
-                        ? 'fixed top-0 left-0 max-w-[480px] min-w-[375px] z-20 bg-white w-full align-start h-[3.5625rem] flex justify-start pt-[1.25rem] pb-[1.25rem] pr-[87%]'
-                        : 'fixed top-0 left-0 max-w-[480px] min-w-[375px] z-20 bg-transparent w-full align-start h-[3.5625rem] pt-[1.25rem] pb-[1.25rem] pr-[87%] flex justify-start',
+                    className:
+                        'fixed top-0 left-0 max-w-[480px] min-w-[375px] z-20 bg-transparent w-full align-start h-[3.5625rem] pt-[1.25rem] pb-[1.25rem] pr-[87%] flex justify-start',
                 }}>
                 <div>
                     <SlArrowLeft color={isScrolled ? 'black' : 'white'} />
@@ -49,7 +64,7 @@ const DesignerDetail: React.FC = () => {
                 <Reservation />
                 <Divider />
                 {/*  비포 애프터 */}
-                <ButtonLg text='예약' />
+                {isButtonVisible && <ButtonLg text='예약' />}
             </div>
         </div>
     )
