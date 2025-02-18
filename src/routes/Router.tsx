@@ -55,7 +55,7 @@ const Router = () => {
                 />
                 <Route path='/servererror' element={<ServerError />} />
                 <Route path='/networkerror' element={<NetworkError />} />
-                 <Route path='/splash' element={<Splash />} />
+                <Route path='/splash' element={<Splash />} />
                 {/* 🔹 404 Not Found 라우트 */}
                 <Route path='*' element={<NotFound />} />
             </Routes>

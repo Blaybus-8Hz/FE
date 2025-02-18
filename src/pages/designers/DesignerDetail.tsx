@@ -38,7 +38,7 @@ const DesignerDetail: React.FC = () => {
     }, [reservationTime])
 
     return (
-        <div>
+        <div className='overflow-hidden'>
             <IconContext.Provider
                 value={{
                     className:
@@ -51,16 +51,18 @@ const DesignerDetail: React.FC = () => {
             <img
                 src={`${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`}
                 alt='designer'
-                className='relative h-2/5 w-full object-cover'
+                className='relative object-cover w-full h-2/5'
             />
 
-            <div className='relative z-10 -mt-20 w-full flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
+            <div className='relative z-10 flex-auto w-full pb-10 -mt-20 bg-white shadow-md rounded-t-2xl'>
                 <DesignerInfo />
                 <Divider />
                 <Reservation />
                 <Divider />
                 {/*  비포 애프터 */}
-                <BeforeAfterSection />
+                <div className='px-20 pb-52 pt-38'>
+                    <BeforeAfterSection />
+                </div>
                 {isButtonVisible && <ButtonLg text='예약' />}
             </div>
         </div>
