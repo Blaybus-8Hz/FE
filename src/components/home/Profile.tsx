@@ -9,7 +9,7 @@ export default function Profile({ size, imgUrl }: Props) {
         <img
             src={imgUrl}
             alt='디자이너 프로필 이미지'
-            className={`shrink-0 overflow-hidden rounded-82 border-[1.37px] border-gray-100/50 ${style}`}
+            className={`overflow-hidden rounded-82 border-[1.37px] border-gray-100/50 ${style}`}
         />
     )
 }

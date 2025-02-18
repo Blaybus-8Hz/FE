@@ -8,8 +8,7 @@ export default function RescheduleBanner() {
             <div className='flex items-center gap-14'>
                 <Profile size='sm' imgUrl={DesignerImg} />
                 <span className='font-medium text-gray-900 text-body2'>
-                    만족하셨던{' '}
-                    <span className='text-purple-500'>김서연 디자이너</span>{' '}
+                    만족하셨던 <span className='text-purple-500'>디자이너</span>{' '}
                     님과
                     <br />
                     재예약은 어떠세요?
