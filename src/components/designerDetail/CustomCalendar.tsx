@@ -8,12 +8,15 @@ import { useGetAvailableDates } from '../../apis/api/get/useGetAvailableDates'
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
 
-const CustomCalendar: React.FC = () => {
-    const [selectedDate, setSelectedDate] = useState<Value>(new Date()) // 초기값은 현 날짜
-    const handleSelect = (value: Value) => {
-        console.log(value)
-        setSelectedDate(value)
-    }
+interface DateSelectProps {
+    selectedDate: Value | null
+    handleDateClick: (value: Value) => void
+}
+
+const CustomCalendar: React.FC<DateSelectProps> = ({
+    selectedDate,
+    handleDateClick,
+}) => {
     //선택 가능한 maxDate 설정
     const threeMonthLater = dayjs().add(3, 'month').endOf('month').toDate()
 
@@ -22,7 +25,6 @@ const CustomCalendar: React.FC = () => {
      */
     const designerId = '1' //임시 디자이너 id
     const availableDates = useGetAvailableDates(designerId)
-    // const availableTimes = useGetAvailableTimes()
     const [availableDateList, setAvailableDateList] = useState<string[]>([])
 
     useEffect(() => {
@@ -33,6 +35,13 @@ const CustomCalendar: React.FC = () => {
         }
     }, [availableDates.isSuccess])
 
+    useEffect(() => {
+        if (availableDateList.length > 0) {
+            const firstAvailableDate = availableDateList[0]
+            handleDateClick(new Date(firstAvailableDate))
+        }
+    }, [availableDateList])
+
     return (
         <div>
             <Calendar
@@ -41,7 +50,7 @@ const CustomCalendar: React.FC = () => {
                 locale='ko'
                 formatMonthYear={(_, date) => dayjs(date).format('YYYY.MM')}
                 formatDay={(_, date) => dayjs(date).format('D')}
-                onChange={handleSelect}
+                onChange={handleDateClick}
                 value={selectedDate}
                 minDate={new Date()} // 오늘 이전 날짜 선택 불가
                 maxDate={threeMonthLater} // 3개월 이후 날짜 선택 불가
@@ -50,10 +59,11 @@ const CustomCalendar: React.FC = () => {
                 prev2Label={null}
                 next2Label={null}
                 showNeighboringMonth={false}
-                tileDisabled={({ date }) => {
-                    const dateString = date.toISOString().split('T')[0]
-                    return !availableDateList.includes(dateString)
-                }}
+                tileDisabled={({ date }) =>
+                    !availableDateList.includes(
+                        dayjs(date).format('YYYY-MM-DD')
+                    )
+                }
             />
         </div>
     )
