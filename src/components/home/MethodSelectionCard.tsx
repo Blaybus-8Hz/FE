@@ -22,15 +22,17 @@ interface Props {
 }
 
 export default function MethodSelectionCard({ type }: Props) {
-    const { counselType, setCounselType } = useHomeStore()
+    const { counselMethod, setCounselMethod } = useHomeStore()
     const { copy, price, icon } = methodData[type]
-    const isActive = type === counselType
+    const isActive = type === counselMethod
 
     return (
         <button
             type='button'
             className={`relative h-150 w-166 grow rounded-lg border-[1.5px] border-purple-300 p-14 transition duration-200 ease-in-out ${isActive ? 'bg-purple-50' : 'bg-gray-100'}`}
-            onClick={() => setCounselType(type)}>
+            onClick={() => {
+                setCounselMethod(type)
+            }}>
             <div className='flex flex-col justify-between h-full text-left'>
                 <span className='font-bold text-purple-800 whitespace-pre-wrap text-h4'>
                     {copy}

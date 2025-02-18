@@ -1,7 +1,7 @@
+import { CounselType } from './../components/home/MethodSelectionCard'
 import { create } from 'zustand'
 import { combine, persist } from 'zustand/middleware'
 import { TabType } from '../components/TabBar/TabBar'
-import { CounselType } from '../components/home/MethodSelectionCard'
 import { Region } from '../components/home/BottomSheet'
 import { ChipType } from '../components/home/Chip'
 
@@ -42,15 +42,17 @@ export const useTabStore = create(
 export const useHomeStore = create(
     combine(
         {
-            counselType: 'inPerson',
+            counselMethod: 'both',
             isSheetOpen: false,
             currentRegion: '서울 전체',
             selectedChips: ['전체'],
         },
         (set, get) => {
             return {
-                setCounselType: (switchTo: CounselType) => {
-                    set({ counselType: switchTo })
+                setCounselMethod: (switchTo: CounselType) => {
+                    const currentType = get().counselMethod
+                    if (currentType === switchTo) set({ counselMethod: 'both' })
+                    else set({ counselMethod: switchTo })
                 },
                 toggleSheet: () => {
                     set({ isSheetOpen: !get().isSheetOpen })
