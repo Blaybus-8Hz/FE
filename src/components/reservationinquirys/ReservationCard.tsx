@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CancelPopup from "./CancelPopup";
 import { CalendarIcon, ClockIcon, MapPinIcon, ClipboardIcon } from "@heroicons/react/24/outline";
-
+import { copyToClipboard } from "../../utils/clipboard"; // 📌 클립보드 유틸 파일 가져오기
 interface Reservation {
   id: number;
   name: string;
@@ -29,10 +29,7 @@ const getStatusBadgeStyle = (status: string) => {
   }
 };
 
-const handleCopyToClipboard = (text: string) => {
-  navigator.clipboard.writeText(text);
-  alert("주소가 복사되었습니다!");
-};
+
 
 const getTypeBadgeStyle = (type: string) =>
   type === "온라인"
@@ -81,11 +78,15 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({ reservation }
           <ClockIcon className="w-[20px] h-[20px] text-gray-700 mr-[4px]" title="시간" />
           {reservation.time}
         </p>
-        <p className="text-gray-950 flex items-center gap-[8px] mb-[4px]">
-          <MapPinIcon className="w-[20px] h-[20px] text-gray-700 mr-[4px]" title="위치" />
-          {reservation.location}
-          <ClipboardIcon className="w-[16px] h-[16px] text-gray-600 cursor-pointer hover:text-gray-600 transition-all duration-150" onClick={() => handleCopyToClipboard(reservation.location)} title="주소 복사" />
-        </p>
+        <p className="text-gray-950 flex items-center gap-[8px]">
+        <MapPinIcon className="w-[20px] h-[20px] text-gray-700 mr-[4px]" title="위치" />
+        {reservation.location}
+        <ClipboardIcon
+          className="w-[16px] h-[16px] text-gray-600 cursor-pointer hover:text-gray-600 transition-all duration-150"
+          onClick={() => copyToClipboard(reservation.location)} // ✅ 유틸 함수 사용
+          title="주소 복사"
+        />
+      </p>
 
         {reservation.status === "입금 확인중" && (
           <div className="flex justify-start gap-[16px] text-gray-700">
