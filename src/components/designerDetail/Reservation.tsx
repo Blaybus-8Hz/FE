@@ -34,9 +34,17 @@ const Reservation: React.FC = () => {
             availableTimes.data !== null &&
             availableTimes.data.data.data['예약 가능 시간 리스트: '].length > 0
         ) {
-            setTimeTable(
-                availableTimes.data.data.data['예약 가능 시간 리스트: ']
-            )
+            const formattedTimes = availableTimes.data.data.data[
+                '예약 가능 시간 리스트: '
+            ].map((time: string) => {
+                const [hour, minute] = time.split(':')
+                const hourNumber = parseInt(hour, 10)
+                const period = hourNumber < 12 ? '오전' : '오후'
+                const formattedHour =
+                    hourNumber % 12 === 0 ? 12 : hourNumber % 12
+                return `${period} ${formattedHour}:${minute}`
+            })
+            setTimeTable(formattedTimes)
         }
     }, [availableTimes, selectedDate])
 
