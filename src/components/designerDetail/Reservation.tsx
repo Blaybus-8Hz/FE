@@ -46,7 +46,7 @@ const Reservation: React.FC = () => {
             })
             setTimeTable(formattedTimes)
         }
-    }, [availableTimes, selectedDate])
+    }, [availableTimes.isSuccess])
 
     return (
         <div className='flex flex-col gap-[1.44rem] pb-[2.8rem] pl-[1.25rem] pr-[1.25rem] pt-[2.8rem]'>
