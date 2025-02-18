@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Calendar from 'react-calendar'
 import '../../styles/calendar.css'
 import dayjs from 'dayjs'
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl'
+import { useGetAvailableDates } from '../../apis/api/get/useGetAvailableDates'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
@@ -15,6 +16,22 @@ const CustomCalendar: React.FC = () => {
     }
     //선택 가능한 maxDate 설정
     const threeMonthLater = dayjs().add(3, 'month').endOf('month').toDate()
+
+    /**
+     * 예약 가능 기간 조회
+     */
+    const designerId = '1' //임시 디자이너 id
+    const availableDates = useGetAvailableDates(designerId)
+    // const availableTimes = useGetAvailableTimes()
+    const [availableDateList, setAvailableDateList] = useState<string[]>([])
+
+    useEffect(() => {
+        if (availableDates.isSuccess && availableDates.data !== null) {
+            setAvailableDateList(
+                availableDates.data.data.data['예약 가능 날짜 리스트: ']
+            )
+        }
+    }, [availableDates.isSuccess])
 
     return (
         <div>
@@ -33,6 +50,10 @@ const CustomCalendar: React.FC = () => {
                 prev2Label={null}
                 next2Label={null}
                 showNeighboringMonth={false}
+                tileDisabled={({ date }) => {
+                    const dateString = date.toISOString().split('T')[0]
+                    return !availableDateList.includes(dateString)
+                }}
             />
         </div>
     )

@@ -26,7 +26,7 @@ const DesignerDetail: React.FC = () => {
     }, [])
 
     return (
-        <div className='relative flex flex-col items-center justify-start w-full h-screen mt-0 overflow-visible'>
+        <div className='relative mt-0 flex h-screen w-full flex-col items-center justify-start overflow-visible'>
             <IconContext.Provider
                 value={{
                     className: isScrolled
@@ -40,10 +40,10 @@ const DesignerDetail: React.FC = () => {
             <img
                 src={`${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`}
                 alt='designer'
-                className='relative object-cover w-full h-2/5'
+                className='relative h-2/5 w-full object-cover'
             />
 
-            <div className='relative z-10 flex-auto w-full pb-10 -mt-20 bg-white shadow-md rounded-t-2xl'>
+            <div className='relative z-10 -mt-20 w-full flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
                 <DesignerInfo />
                 <Divider />
                 <Reservation />
