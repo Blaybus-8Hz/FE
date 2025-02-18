@@ -6,6 +6,7 @@ import DesignerInfo from '../../components/designerDetail/DesignerInfo'
 import Divider from '../../components/designerDetail/Divider'
 import Reservation from '../../components/designerDetail/Reservation'
 import ButtonLg from '../../components/designerDetail/ButtonLg'
+import BeforeAfterSection from '../../components/home/BeforeAfterSection'
 
 const DesignerDetail: React.FC = () => {
     const { reservationTime } = useReservationStore()
@@ -59,6 +60,7 @@ const DesignerDetail: React.FC = () => {
                 <Reservation />
                 <Divider />
                 {/*  비포 애프터 */}
+                <BeforeAfterSection />
                 {isButtonVisible && <ButtonLg text='예약' />}
             </div>
         </div>
