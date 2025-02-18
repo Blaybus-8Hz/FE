@@ -8,8 +8,7 @@ import Reservation from '../../components/designerDetail/Reservation'
 import ButtonLg from '../../components/designerDetail/ButtonLg'
 
 const DesignerDetail: React.FC = () => {
-    const { designerId, reservationDate, reservationTime, isOnline } =
-        useReservationStore()
+    const { reservationTime } = useReservationStore()
     const [isButtonVisible, setIsButtonVisible] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
 
@@ -30,16 +29,12 @@ const DesignerDetail: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        if (
-            designerId.length > 0 &&
-            reservationDate !== null &&
-            reservationTime !== null
-        ) {
+        if (reservationTime !== null) {
             setIsButtonVisible(true)
         } else {
             setIsButtonVisible(false)
         }
-    }, [designerId, reservationDate, reservationTime])
+    }, [reservationTime])
 
     return (
         <div>

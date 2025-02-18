@@ -17,7 +17,7 @@ export const useReservationStore = create<ReservationState>((set) => ({
     reservationTime: null,
     isOnline: false,
     setDesignerId: (id) => set({ designerId: id }),
-    setReservationDate: (date) => set({ reservationDate: date }),
+    setReservationDate: (date) => set({ reservationDate: date, reservationTime: null }),
     setReservationTime: (time) => set({ reservationTime: time }),
     setIsOnline: (isOnline) => set({ isOnline }),
 }))
