@@ -1,7 +1,6 @@
 import { CounselType } from './../components/home/MethodSelectionCard'
 import { create } from 'zustand'
 import { combine, persist } from 'zustand/middleware'
-import { TabType } from '../components/TabBar/TabBar'
 import { Region } from '../components/home/BottomSheet'
 import { ChipType } from '../components/home/Chip'
 
@@ -18,23 +17,6 @@ export const useAccessTokenStore = create<accessTokenStore>()(
         }),
         {
             name: 'access-token-storage',
-        }
-    )
-)
-
-export const useTabStore = create(
-    combine(
-        {
-            currentTab: 'home',
-        },
-        (set) => {
-            return {
-                setCurrentTab: (to: TabType) => {
-                    set({
-                        currentTab: to,
-                    })
-                },
-            }
         }
     )
 )

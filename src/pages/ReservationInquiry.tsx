@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import ReservationList from '../components/reservationinquirys/ReservationList'
 import ConsultationAlert from '../components/reservationinquirys/ConsultationAlert'
-import Header from '../utils/Header' // 헤더 컴포넌트 import
 import TabBar from '../components/TabBar/TabBar'
+import Logo from '../components/home/Logo'
 interface Reservation {
     id: number
     name: string
@@ -126,7 +126,7 @@ const ReservationInquiry: React.FC = () => {
     return (
         <div className='flex min-h-[100vh] w-full flex-col items-center bg-white'>
             {/* 헤더 (고정된 위치) */}
-            <Header />
+            <Logo />
             <TabBar />
             {/* 콘텐츠를 헤더 높이만큼 아래로 이동 */}
             <div className='mt-[64px] w-full max-w-[768px] p-[20px]'>

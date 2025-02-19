@@ -27,7 +27,27 @@ body {
     background: #262626;
 }
 
-.swiper-slide {
+.swiper-pagination-bullets {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto 20px;
+    width: fit-content;
+    z-index: 5;
+}
+
+.swiper-pagination-bullets .swiper-pagination-bullet {
+    background-color: #a070f8;
+    width: 8px;
+    height: 8px;
+    opacity: 0.3;
+}
+
+.swiper-pagination-bullets .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.banner-swiper .swiper-slide {
     width: auto !important;
 }
 

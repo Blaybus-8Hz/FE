@@ -36,7 +36,7 @@ const bannerData = [
 
 export default function BannerSwiper() {
     return (
-        <div className='-ml-16 mb-44 w-[calc(100%+32px)]'>
+        <div className='banner-swiper -ml-20 mb-44 w-[calc(100%+40px)]'>
             <Swiper
                 spaceBetween={12}
                 slidesPerView='auto'

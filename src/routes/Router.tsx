@@ -17,7 +17,6 @@ const ReservationComplete = lazy(
 const NotFound = lazy(() => import('../pages/NotFound')) // 404 페이지
 const ServerError = lazy(() => import('../pages/SeverError')) // 500 페이지
 const NetworkError = lazy(() => import('../pages/NetworkError')) // 인터넷 연결 오류 페이지
-const Splash = lazy(() => import('../pages/Splash')) // 스플래시 페이지
 const Router = () => {
     const navigate = useNavigate()
 

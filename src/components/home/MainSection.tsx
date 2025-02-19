@@ -12,11 +12,11 @@ export default function MainSection() {
     const visibleDesignerCards = designersData.slice(0, displayCount)
 
     return (
-        <div className='flex flex-col mb-44 mt-116'>
-            <h2 className='mb-16 font-bold text-h2 text-gray-1300'>
+        <div className='flex flex-col mb-44 mt-69'>
+            <h2 className='mb-16 -mx-4 font-bold text-h2 text-gray-1300'>
                 어떤 방식으로 상담 받을까요?
             </h2>
-            <div className='flex mb-12 gap-21'>
+            <div className='flex -mx-4 mb-21 gap-11'>
                 <MethodSelectionCard type='inPerson' />
                 <MethodSelectionCard type='online' />
             </div>

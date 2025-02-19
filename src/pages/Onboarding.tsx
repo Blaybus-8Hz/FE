@@ -1,15 +1,98 @@
-//온보딩 화면
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { Pagination } from 'swiper/modules'
+import OnBoarding01 from '../../public/img/onboarding_1.png'
+import OnBoarding02 from '../../public/img/onboarding_2.png'
+import OnBoarding03 from '../../public/img/onboarding_3.png'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import React from 'react'
+const onBoardingData = [
+    {
+        copy: (
+            <>
+                전문 헤어 디자이너가
+                <br />
+                찾아주는 나만을 위한
+                <br />
+                <span className='text-purple-600'>인생 헤어스타일</span>
+            </>
+        ),
+        image: OnBoarding01,
+    },
+    {
+        copy: (
+            <>
+                <span className='text-purple-600'>직접 만나거나</span>
+                <br />
+                <span className='text-purple-600'>편하게 온라인</span>으로
+                <br />
+                받는 1:1 헤어 컨설팅
+            </>
+        ),
+        image: OnBoarding02,
+    },
+    {
+        copy: (
+            <>
+                헤르츠와 함께하는
+                <br />
+                <span className='text-purple-600'>쉽고 스마트한</span>
+                <br />
+                <span className='text-purple-600'>헤어스타일 상담</span>
+            </>
+        ),
+        image: OnBoarding03,
+    },
+]
 
 const Onboarding: React.FC = () => {
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [my_swiper, set_my_swiper] = useState<any>({})
+    const navigate = useNavigate()
+
+    const handleButtonClick = () => {
+        if (currentIndex === 2) navigate('/')
+        my_swiper.slideNext()
+    }
+
     return (
-        <div className='flex items-center justify-center w-full min-h-screen p-4 bg-gray-100'>
-            <div className='flex flex-col w-full max-h-screen overflow-hidden bg-white border border-gray-300 rounded-lg shadow-lg max-w-7xl md:flex-row'>
-                <div className='flex flex-col justify-center p-6 text-left md:w-1/2 md:p-8 lg:p-10'>
-                    <p className='text-5xl font-bold text-blue-600'>test</p>
-                    <p className='text-lg text-gray-600'>test</p>
-                </div>
+        <div className='relative w-full h-screen bg-gray-100 onboarding'>
+            <Swiper
+                slidesPerView={1}
+                grabCursor={true}
+                className='h-[calc(100vh-88px)]'
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                onInit={(ev) => {
+                    set_my_swiper(ev)
+                }}
+                onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}>
+                {onBoardingData.map((slide) => (
+                    <SwiperSlide>
+                        <div className='h-full overflow-hidden pt-57'>
+                            <div className='flex flex-col items-center gap-22'>
+                                <img
+                                    src={slide.image}
+                                    alt='온보딩'
+                                    className='h-[329px] w-auto max-w-none shrink-0'
+                                />
+                                <h2 className='self-start inline-block font-bold mx-30 text-h1 text-gray-1300'>
+                                    {slide.copy}
+                                </h2>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+            <div className='absolute bottom-0 left-0 right-0 px-16 pt-10 h-88 border-t-1 border-t-gray-300 pb-30'>
+                <button
+                    type='button'
+                    onClick={handleButtonClick}
+                    className={`flex h-48 w-full items-center justify-center rounded-10 bg-gray-1200 text-body1 font-medium text-gray-100`}>
+                    {currentIndex === 2 ? '시작하기' : '다음'}
+                </button>
             </div>
         </div>
     )

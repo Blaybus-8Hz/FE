@@ -2,15 +2,26 @@ import React from 'react'
 
 interface TimeSelectBarProps {
     selectedTime: string | null
+
     handleTimeClick: (time: string) => void
-    timeTable: string[]
 }
 
 const TimeSelectBar: React.FC<TimeSelectBarProps> = ({
     selectedTime,
     handleTimeClick,
-    timeTable,
 }) => {
+    const timeTable = [
+        '오전 12:00',
+        '오후 12:30',
+        '오후 1:00',
+        '오후 1:30',
+        '오후 5:00',
+        '오후 6:00',
+        '오후 7:00',
+        '오후 8:00',
+        '오후 9:00',
+    ]
+
     return (
         <div className='flex flex-row gap-[0.62rem] overflow-scroll'>
             {timeTable.map((time, index) => (
