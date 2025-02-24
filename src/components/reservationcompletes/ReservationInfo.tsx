@@ -9,7 +9,7 @@ const ReservationInfo: React.FC = () => {
                     온라인
                 </span>
                 <p className='text-[18px] font-semibold text-gray-950'>
-                    05.26(일) 오후 1:00~오후 1:30
+                    03.01(토) 오전 10:00~ 오전 10:30
                 </p>
             </div>
         </div>
